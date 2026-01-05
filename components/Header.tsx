@@ -6,16 +6,16 @@ function Header() {
     <nav className="bg-[#3390d6] p-4">
       <ul className="flex flex-row justify-around">
         <li>
-          <Link href="#">Forum</Link>
+          <Link href="/">Forum</Link>
         </li>
         <li>
-          <Link href="#">Games</Link>
+          <Link href="/games">Games</Link>
         </li>
         <li>
-          <Link href="#">Books</Link>
+          <Link href="books">Books</Link>
         </li>
         <li>
-          <Link href="#">Movies</Link>
+          <Link href="/movies">Movies</Link>
         </li>
       </ul>
     </nav>
