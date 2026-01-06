@@ -28,6 +28,7 @@ export default function Movies() {
 
         if (data.Response === "True") {
           setMovies(data.Search);
+          setError("");
         } else {
           setMovies([]);
           setError(data.Error);
@@ -53,17 +54,19 @@ export default function Movies() {
         className="border p-2 mb-4 w-full max-w-md"
       />
 
-      {loading && <p>Loading...</p>}
+      {loading && <p className="min-h-screen">Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
 
-      <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 min-h-screen">
         {movies.map((movie) => (
           <li key={movie.imdbID} className="border p-2">
-            <img
-              src={movie.Poster !== "N/A" ? movie.Poster : "/placeholder.png"}
-              alt={movie.Title}
-              className="mb-2"
-            />
+            <div className="h-7/8">
+              <img
+                src={movie.Poster !== "N/A" ? movie.Poster : "/placeholder.png"}
+                alt={movie.Title}
+                className="mb-2 h-9/10"
+              />
+            </div>
             <h2 className="font-semibold">{movie.Title}</h2>
             <p>{movie.Year}</p>
           </li>
