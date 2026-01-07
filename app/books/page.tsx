@@ -12,6 +12,7 @@ export default function Books() {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     async function fetchBooks() {
@@ -35,17 +36,31 @@ export default function Books() {
     fetchBooks();
   }, []);
 
+  const filteredList = books.filter((item) =>
+    item.title.toLowerCase().includes(query.toLowerCase())
+  );
+
   if (loading) return <p className="p-6">Loading...</p>;
   if (error) return <p className="p-6 text-red-500">{error}</p>;
 
   return (
-    <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-      {books.map((book) => (
-        <div key={book.id} className="border p-3 rounded">
-          <img src={book.image} alt={book.title} />
-          <h2>{book.title}</h2>
-        </div>
-      ))}
-    </div>
+    <>
+      <input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search movies..."
+        className="border p-2 mb-4 mt-6 ml-6 w-full max-w-md"
+      />
+      <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+        {filteredList.map((book) => (
+          <div key={book.id} className="border p-3 rounded">
+            <div className="h-9/10">
+              <img src={book.image} alt={book.title} className="h-9/10" />
+            </div>
+            <h2>{book.title}</h2>
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
