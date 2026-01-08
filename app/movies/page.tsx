@@ -66,7 +66,11 @@ export default function Movies() {
         className="border p-2 mb-4 w-full max-w-md"
       />
 
-      {loading && <p>Loading...</p>}
+      {loading && (
+        <p className="min-h-screen flex justify-center items-center">
+          Loading...
+        </p>
+      )}
       {error && <p className="text-red-500">{error}</p>}
 
       <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
