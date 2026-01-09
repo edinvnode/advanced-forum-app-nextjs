@@ -6,8 +6,8 @@ export default function Loading() {
       <Image
         src="/loading.gif"
         alt="Loading..."
-        width={64}
-        height={64}
+        width={464}
+        height={464}
         priority
       />
     </div>
