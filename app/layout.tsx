@@ -31,7 +31,6 @@ export default function RootLayout({
       >
         <Header />
 
-        {/* Main content grows and pushes footer down */}
         <main className="flex-1">{children}</main>
 
         <Footer />

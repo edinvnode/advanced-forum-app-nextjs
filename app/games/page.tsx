@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Loading from "@/components/Loading";
 
 export default function Games() {
   const [games, setGames] = useState<any[]>([]);
@@ -33,7 +34,12 @@ export default function Games() {
     item.title.toLowerCase().includes(query.toLowerCase())
   );
 
-  if (loading) return <p className="p-6">Loading...</p>;
+  if (loading)
+    return (
+      <p className="min-h-screen flex justify-center items-center">
+        <Loading />
+      </p>
+    );
   if (error) return <p className="p-6 text-red-500">{error}</p>;
 
   return (

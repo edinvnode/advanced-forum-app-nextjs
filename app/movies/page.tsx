@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import MovieCard from "@/components/MovieCard";
 import MovieModal from "@/components/MovieModal";
 import { Movie, MovieDetails } from "@/types/movie";
+import Loading from "@/components/Loading";
 
 export default function Movies() {
   const [query, setQuery] = useState("batman");
@@ -68,7 +69,7 @@ export default function Movies() {
 
       {loading && (
         <p className="min-h-screen flex justify-center items-center">
-          Loading...
+          <Loading />
         </p>
       )}
       {error && <p className="text-red-500">{error}</p>}
