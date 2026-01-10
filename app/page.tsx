@@ -70,7 +70,7 @@ export default function Home() {
     <div className="flex min-h-screen items-center  bg-green-300 font-sans dark:bg-black flex-col">
       {data.map((topic) => (
         <div className="flex flex-row w-screen text-center border border-black justify-between pl-5 pr-5">
-          <div>
+          <div className="flex flex-col justify-start items-start">
             <h2>{topic.topicTitle}</h2>
             <h3>{topic.description}</h3>
           </div>
