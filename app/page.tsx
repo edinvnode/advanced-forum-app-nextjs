@@ -67,7 +67,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex min-h-screen items-center  bg-green-300 font-sans dark:bg-black flex-col">
+    <div className="flex min-h-full items-center  bg-green-300 font-sans dark:bg-black flex-col">
       {data.map((topic) => (
         <div className="flex flex-row w-full text-center border border-black justify-between px-5">
           <div className="flex flex-col justify-start items-start">

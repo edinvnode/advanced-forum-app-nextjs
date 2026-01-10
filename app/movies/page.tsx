@@ -28,6 +28,7 @@ export default function Movies() {
 
         if (data.Response === "True") {
           setMovies(data.Search);
+          setError("");
         } else {
           setMovies([]);
           setError(data.Error);
