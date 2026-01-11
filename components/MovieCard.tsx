@@ -14,16 +14,16 @@ export default function MovieCard({ movie, onSelect }: Props) {
         console.log("Clicked:", movie.imdbID);
         onSelect(movie.imdbID);
       }}
-      className="border p-2 cursor-pointer hover:shadow-lg transition"
+      className="border p-2 cursor-pointer hover:shadow-lg transition h-130"
     >
-      <div className="h-8/9">
+      <div className="h-8/9 border border-black">
         <img
           src={movie.Poster !== "N/A" ? movie.Poster : "/placeholder.png"}
           alt={movie.Title}
           className="h-9/10 mb-2"
         />
       </div>
-      <h2 className="font-semibold">{movie.Title}</h2>
+      <h2 className="font-semibold">{movie.Title.substring(0, 35)}</h2>
       <p>{movie.Year}</p>
     </li>
   );

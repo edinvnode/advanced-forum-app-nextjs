@@ -5,6 +5,7 @@ import MovieCard from "@/components/MovieCard";
 import MovieModal from "@/components/MovieModal";
 import { Movie, MovieDetails } from "@/types/movie";
 import Loading from "@/components/Loading";
+import Tooltip from "@/components/Tooltip";
 
 export default function Movies() {
   const [query, setQuery] = useState("batman");
@@ -77,11 +78,13 @@ export default function Movies() {
 
       <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {movies.map((movie) => (
-          <MovieCard
-            key={movie.imdbID}
-            movie={movie}
-            onSelect={setSelectedId}
-          />
+          <Tooltip position="bottom" text={movie.Title}>
+            <MovieCard
+              key={movie.imdbID}
+              movie={movie}
+              onSelect={setSelectedId}
+            />
+          </Tooltip>
         ))}
       </ul>
 
