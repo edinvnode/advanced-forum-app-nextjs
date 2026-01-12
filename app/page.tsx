@@ -4,7 +4,8 @@ import { useState, ChangeEvent, FormEvent } from "react";
 type Topic = {
   id: number;
   topicTitle: string;
-  description: string;
+  topicDescription: string;
+  topicData: string;
   topicAuthor: string;
 };
 
@@ -13,25 +14,29 @@ export default function Home() {
     {
       id: 1,
       topicTitle: "New Games",
-      description: "Talk about latest games on market",
+      topicDescription: "Talk about latest games on market",
+      topicData: "Here is an example of latest game.",
       topicAuthor: "admin",
     },
     {
       id: 2,
       topicTitle: "Old Games",
-      description: "Talk about old games you like",
+      topicDescription: "Talk about old games on market",
+      topicData: "Here is an example of old game.",
       topicAuthor: "admin",
     },
     {
       id: 3,
       topicTitle: "Best Games",
-      description: "What are the best games you played?",
+      topicDescription: "Talk about best games on market",
+      topicData: "Here is an example of best game.",
       topicAuthor: "admin",
     },
   ]);
 
   const [form, setForm] = useState({
     topicTitle: "",
+    topicDescription: "",
     topicData: "",
     topicAuthor: "admin",
   });
@@ -52,6 +57,7 @@ export default function Home() {
 
     if (
       form.topicTitle === "" ||
+      form.topicDescription === "" ||
       form.topicData === "" ||
       form.topicAuthor === ""
     ) {
@@ -60,7 +66,8 @@ export default function Home() {
     const newTopic: Topic = {
       id: Date.now(),
       topicTitle: form.topicTitle,
-      description: form.topicData,
+      topicDescription: form.topicDescription,
+      topicData: form.topicData,
       topicAuthor: form.topicAuthor,
     };
 
@@ -69,6 +76,7 @@ export default function Home() {
     // Clear form
     setForm({
       topicTitle: "",
+      topicDescription: "",
       topicData: "",
       topicAuthor: "admin",
     });
@@ -83,7 +91,7 @@ export default function Home() {
         >
           <div className="flex flex-col justify-start items-start">
             <h2>{topic.topicTitle}</h2>
-            <h3>{topic.description}</h3>
+            <h3>{topic.topicDescription}</h3>
           </div>
           <span>Created by: {topic.topicAuthor}</span>
         </div>
@@ -99,9 +107,18 @@ export default function Home() {
           onChange={handleChange}
         />
 
+        <input
+          type="text"
+          placeholder="Topic description..."
+          className="border border-black bg-gray-100 m-2"
+          name="topicDescription"
+          value={form.topicDescription}
+          onChange={handleChange}
+        />
+
         <textarea
           className="bg-gray-100 border border-black m-2"
-          placeholder="Enter topic data..."
+          placeholder="Enter your post data here..."
           cols={50}
           rows={10}
           value={form.topicData}

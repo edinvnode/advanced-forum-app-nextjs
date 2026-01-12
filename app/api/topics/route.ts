@@ -1,14 +1,29 @@
 import { NextResponse } from "next/server";
 import clientPromise from "@/lib/mongodb";
 
+// GET all topics
 export async function GET() {
-    try {
-        const client = await clientPromise;
-        const db = client.db("forumDB");
-        const topics = await db.collection("topics").find({}).toArray();
+    const client = await clientPromise;
+    const db = client.db("forumDB");
 
-        return NextResponse.json(topics);
-    } catch (error) {
-        return NextResponse.json({ error: "Failed to fetch topics" }, { status: 500 });
-    }
+    const topics = await db.collection("topics").find({}).toArray();
+
+    return NextResponse.json(topics);
+}
+
+// POST new topic
+export async function POST(req: Request) {
+    const body = await req.json();
+
+    const client = await clientPromise;
+    const db = client.db("forumDB");
+
+    const result = await db.collection("topics").insertOne({
+        topicTitle: body.topicTitle,
+        description: body.description,
+        topicAuthor: body.topicAuthor,
+        createdAt: new Date(),
+    });
+
+    return NextResponse.json({ success: true, id: result.insertedId });
 }
