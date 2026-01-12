@@ -50,6 +50,13 @@ export default function Home() {
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
+    if (
+      form.topicTitle === "" ||
+      form.topicData === "" ||
+      form.topicAuthor === ""
+    ) {
+      return;
+    }
     const newTopic: Topic = {
       id: Date.now(),
       topicTitle: form.topicTitle,
