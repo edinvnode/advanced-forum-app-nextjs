@@ -20,7 +20,8 @@ export async function POST(req: Request) {
 
     const result = await db.collection("topics").insertOne({
         topicTitle: body.topicTitle,
-        description: body.description,
+        topicDescription: body.topicDescription,
+        topicData: body.topicData,
         topicAuthor: body.topicAuthor,
         createdAt: new Date(),
     });
