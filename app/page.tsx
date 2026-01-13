@@ -1,5 +1,5 @@
 "use client";
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useEffect, useState, ChangeEvent, FormEvent } from "react";
 
 type Topic = {
   id: number;
@@ -10,29 +10,7 @@ type Topic = {
 };
 
 export default function Home() {
-  const [topics, setTopics] = useState<Topic[]>([
-    {
-      id: 1,
-      topicTitle: "New Games",
-      topicDescription: "Talk about latest games on market",
-      topicData: "Here is an example of latest game.",
-      topicAuthor: "admin",
-    },
-    {
-      id: 2,
-      topicTitle: "Old Games",
-      topicDescription: "Talk about old games on market",
-      topicData: "Here is an example of old game.",
-      topicAuthor: "admin",
-    },
-    {
-      id: 3,
-      topicTitle: "Best Games",
-      topicDescription: "Talk about best games on market",
-      topicData: "Here is an example of best game.",
-      topicAuthor: "admin",
-    },
-  ]);
+  const [topics, setTopics] = useState<Topic[]>([]);
 
   const [form, setForm] = useState({
     topicTitle: "",
@@ -40,6 +18,16 @@ export default function Home() {
     topicData: "",
     topicAuthor: "admin",
   });
+
+  useEffect(() => {
+    async function fetchTopics() {
+      const res = await fetch("/api/topics");
+      const data = await res.json();
+      setTopics(data);
+    }
+
+    fetchTopics();
+  }, []);
 
   // Correct event type
   function handleChange(
@@ -50,9 +38,8 @@ export default function Home() {
       [e.target.name]: e.target.value,
     });
   }
-
-  // Correct submit logic
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  //fetch data from route
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (
@@ -63,17 +50,24 @@ export default function Home() {
     ) {
       return;
     }
-    const newTopic: Topic = {
-      id: Date.now(),
-      topicTitle: form.topicTitle,
-      topicDescription: form.topicDescription,
-      topicData: form.topicData,
-      topicAuthor: form.topicAuthor,
-    };
 
-    setTopics((prev) => [...prev, newTopic]);
+    const res = await fetch("/api/topics", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
 
-    // Clear form
+    const result = await res.json();
+
+    if (result.success) {
+      // refresh list from DB
+      const updated = await fetch("/api/topics");
+      const data = await updated.json();
+      setTopics(data);
+    }
+
     setForm({
       topicTitle: "",
       topicDescription: "",

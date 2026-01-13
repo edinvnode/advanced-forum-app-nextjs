@@ -4,7 +4,7 @@ import clientPromise from "@/lib/mongodb";
 // GET all topics
 export async function GET() {
     const client = await clientPromise;
-    const db = client.db("forumDB");
+    const db = client.db("forumdata");
 
     const topics = await db.collection("topics").find({}).toArray();
 
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     const body = await req.json();
 
     const client = await clientPromise;
-    const db = client.db("forumDB");
+    const db = client.db("forumdata");
 
     const result = await db.collection("topics").insertOne({
         topicTitle: body.topicTitle,
