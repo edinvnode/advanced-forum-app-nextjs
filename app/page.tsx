@@ -2,7 +2,7 @@
 import { useEffect, useState, ChangeEvent, FormEvent } from "react";
 
 type Topic = {
-  id: number;
+  _id: string;
   topicTitle: string;
   topicDescription: string;
   topicData: string;
@@ -76,18 +76,42 @@ export default function Home() {
     });
   }
 
+  async function deleteTopic(id: string) {
+    await fetch("/api/topics", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
+
+    // Refresh list
+    const res = await fetch("/api/topics");
+    const data = await res.json();
+    setTopics(data);
+  }
+
   return (
     <div className="flex min-h-full items-center bg-green-300 font-sans dark:bg-black flex-col">
       {topics.map((topic) => (
         <div
-          key={topic.id}
+          key={topic._id}
           className="flex flex-row w-full text-center border border-black justify-between px-5"
         >
           <div className="flex flex-col justify-start items-start">
             <h2>{topic.topicTitle}</h2>
             <h3>{topic.topicDescription}</h3>
           </div>
-          <span>Created by: {topic.topicAuthor}</span>
+          <div className="flex gap-3 items-center">
+            <span>Created by: {topic.topicAuthor}</span>
+
+            <button
+              className="bg-red-500 text-white px-3 py-1"
+              onClick={() => deleteTopic(topic._id)}
+            >
+              Delete
+            </button>
+          </div>
         </div>
       ))}
 

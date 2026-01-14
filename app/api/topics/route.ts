@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import clientPromise from "@/lib/mongodb";
+import { ObjectId } from "mongodb";
 
 // GET all topics
 export async function GET() {
@@ -27,4 +28,19 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ success: true, id: result.insertedId });
+}
+
+
+//DELETE topic
+export async function DELETE(req: Request) {
+    const { id } = await req.json();
+
+    const client = await clientPromise;
+    const db = client.db("forumdata");
+
+    await db.collection("topics").deleteOne({
+        _id: new ObjectId(id),
+    });
+
+    return NextResponse.json({ success: true });
 }
