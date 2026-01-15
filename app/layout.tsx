@@ -31,7 +31,7 @@ export default function RootLayout({
       >
         <Header />
 
-        <main className="flex-1">{children}</main>
+        <main className="flex-1  bg-[#0f0f0f]">{children}</main>
 
         <Footer />
       </body>

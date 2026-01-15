@@ -92,7 +92,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex min-h-full items-center bg-green-300 font-sans dark:bg-black flex-col">
+    <div className="flex min-h-full items-center text-white bg-[#0f0f0f] font-sans dark:bg-black flex-col">
       {topics.map((topic) => (
         <div
           key={topic._id}
@@ -144,7 +144,10 @@ export default function Home() {
           onChange={handleChange}
         />
 
-        <button type="submit" className="bg-gray-400 border border-black m-2">
+        <button
+          type="submit"
+          className="bg-[#3390d6] text-black border border-black m-2"
+        >
           Submit thread
         </button>
       </form>
