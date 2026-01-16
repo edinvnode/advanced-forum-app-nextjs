@@ -92,6 +92,12 @@ export default function Home() {
     setTopics(data);
   }
 
+  useEffect(() => {
+    if (topics.length > 0) {
+      console.log("First topic id:", topics[0]._id);
+    }
+  }, [topics]);
+
   return (
     <div className="flex min-h-full items-center text-white bg-[#0f0f0f] font-sans dark:bg-black flex-col">
       {topics.map((topic) => (

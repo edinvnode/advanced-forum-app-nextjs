@@ -2,15 +2,17 @@ import clientPromise from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export default async function TopicPage({ params }: Props) {
+  const { id } = await params; // ✅ must await params
+
   const client = await clientPromise;
   const db = client.db("forumdata");
 
   const topic = await db.collection("topics").findOne({
-    _id: new ObjectId(params.id),
+    _id: new ObjectId(id),
   });
 
   if (!topic) {
