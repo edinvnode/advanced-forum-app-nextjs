@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState, ChangeEvent, FormEvent } from "react";
+import Link from "next/link";
 
 type Topic = {
   _id: string;
@@ -99,7 +100,11 @@ export default function Home() {
           className="flex flex-row w-full text-center border border-black justify-between px-5"
         >
           <div className="flex flex-col justify-start items-start">
-            <h2>{topic.topicTitle}</h2>
+            <Link href={`/topics/${topic._id}`}>
+              <h2 className="cursor-pointer text-blue-600 hover:underline">
+                {topic.topicTitle}
+              </h2>
+            </Link>
             <h3>{topic.topicDescription}</h3>
           </div>
           <div className="flex gap-3 items-center">
