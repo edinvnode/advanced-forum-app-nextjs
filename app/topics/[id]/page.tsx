@@ -1,3 +1,7 @@
+"use client";
+
+import { useState, ChangeEvent } from "react";
+
 import clientPromise from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
 
@@ -6,7 +10,23 @@ type Props = {
 };
 
 export default async function TopicPage({ params }: Props) {
-  const { id } = await params; // ✅ must await params
+  const { id } = await params;
+  const [form, setForm] = useState({
+    postTitle: "",
+    postData: "",
+  });
+
+  // Correct event type
+  function handleChange(
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  const handleSubmit = () => {};
 
   const client = await clientPromise;
   const db = client.db("forumdata");
@@ -38,7 +58,7 @@ export default async function TopicPage({ params }: Props) {
           placeholder="Post title..."
           className="border border-black bg-gray-100 m-2"
           name="postTitle"
-          value={form.topicTitle}
+          value={form.postTitle}
           onChange={handleChange}
         />
 
@@ -47,7 +67,7 @@ export default async function TopicPage({ params }: Props) {
           placeholder="Enter your post data here..."
           cols={50}
           rows={10}
-          value={form.topicData}
+          value={form.postData}
           name="postData"
           onChange={handleChange}
         />
