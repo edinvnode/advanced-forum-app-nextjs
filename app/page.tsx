@@ -8,6 +8,7 @@ type Topic = {
   topicDescription: string;
   topicData: string;
   topicAuthor: string;
+  posts: string[];
 };
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
     topicDescription: "",
     topicData: "",
     topicAuthor: "admin",
+    posts: [],
   });
 
   useEffect(() => {
@@ -74,6 +76,7 @@ export default function Home() {
       topicDescription: "",
       topicData: "",
       topicAuthor: "admin",
+      posts: [],
     });
   }
 
@@ -130,7 +133,7 @@ export default function Home() {
         <input
           type="text"
           placeholder="Topic title..."
-          className="border border-black bg-gray-100 m-2"
+          className="border border-black bg-gray-100 m-2 text-black"
           name="topicTitle"
           value={form.topicTitle}
           onChange={handleChange}
@@ -139,14 +142,14 @@ export default function Home() {
         <input
           type="text"
           placeholder="Topic description..."
-          className="border border-black bg-gray-100 m-2"
+          className="border border-black bg-gray-100 m-2 text-black"
           name="topicDescription"
           value={form.topicDescription}
           onChange={handleChange}
         />
 
         <textarea
-          className="bg-gray-100 border border-black m-2"
+          className="bg-gray-100 border border-black m-2 text-black"
           placeholder="Enter your post data here..."
           cols={50}
           rows={10}

@@ -25,6 +25,7 @@ export async function POST(req: Request) {
         topicData: body.topicData,
         topicAuthor: body.topicAuthor,
         createdAt: new Date(),
+        posts: [],
     });
 
     return NextResponse.json({ success: true, id: result.insertedId });
