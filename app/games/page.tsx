@@ -31,7 +31,7 @@ export default function Games() {
   }, []);
 
   const filteredList = games.filter((item) =>
-    item.title.toLowerCase().includes(query.toLowerCase())
+    item.title.toLowerCase().includes(query.toLowerCase()),
   );
 
   if (loading)
@@ -48,13 +48,13 @@ export default function Games() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search movies..."
-        className="border p-2 mb-4 mt-6 ml-6 w-full max-w-md"
+        className="border p-2 mb-4 mt-6 ml-6 w-full max-w-md text-white"
       />
       <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
         {filteredList.map((game) => (
           <div key={game.id} className="border p-3 rounded">
             <img src={game.thumbnail} alt={game.title} />
-            <h2>{game.title}</h2>
+            <h2 className="text-white">{game.title}</h2>
           </div>
         ))}
       </div>

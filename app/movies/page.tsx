@@ -23,7 +23,7 @@ export default function Movies() {
 
       try {
         const res = await fetch(
-          `https://www.omdbapi.com/?apikey=ced0841&s=${query}`
+          `https://www.omdbapi.com/?apikey=ced0841&s=${query}`,
         );
         const data = await res.json();
 
@@ -49,7 +49,7 @@ export default function Movies() {
 
     async function fetchDetails() {
       const res = await fetch(
-        `https://www.omdbapi.com/?apikey=ced0841&i=${selectedId}&plot=full`
+        `https://www.omdbapi.com/?apikey=ced0841&i=${selectedId}&plot=full`,
       );
       const data = await res.json();
       setDetails(data);
@@ -66,7 +66,7 @@ export default function Movies() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search movies..."
-        className="border p-2 mb-4 w-full max-w-md"
+        className="border p-2 mb-4 w-full max-w-md text-white"
       />
 
       {loading && (

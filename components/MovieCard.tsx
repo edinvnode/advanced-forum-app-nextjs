@@ -23,8 +23,10 @@ export default function MovieCard({ movie, onSelect }: Props) {
           className="h-9/10 mb-2"
         />
       </div>
-      <h2 className="font-semibold">{movie.Title.substring(0, 35)}</h2>
-      <p>{movie.Year}</p>
+      <h2 className="font-semibold text-white">
+        {movie.Title.substring(0, 35)}
+      </h2>
+      <p className="text-white">{movie.Year}</p>
     </li>
   );
 }
