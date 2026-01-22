@@ -8,7 +8,15 @@ type Topic = {
   topicDescription: string;
   topicData: string;
   topicAuthor: string;
-  posts: string[];
+  posts: Post[];
+};
+
+type Post = {
+  _id: string;
+  postTitle: string;
+  postData: string;
+  postDate: string;
+  postAuthor: string;
 };
 
 export default function Home() {
@@ -34,7 +42,7 @@ export default function Home() {
 
   // Correct event type
   function handleChange(
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
     setForm({
       ...form,
