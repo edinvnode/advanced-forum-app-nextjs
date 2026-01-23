@@ -47,7 +47,7 @@ export default function Games() {
       <input
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search movies..."
+        placeholder="Search games..."
         className="border p-2 mb-4 mt-6 ml-6 w-full max-w-md text-white"
       />
       <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
