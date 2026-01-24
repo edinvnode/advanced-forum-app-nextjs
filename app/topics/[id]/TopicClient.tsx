@@ -12,9 +12,6 @@ export default function TopicClient({ topicId }: Props) {
     postData: "",
   });
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
   function handleChange(
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) {
@@ -26,39 +23,16 @@ export default function TopicClient({ topicId }: Props) {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setError("");
 
-    if (!form.postTitle || !form.postData) {
-      setError("Please fill all fields.");
-      return;
-    }
-
-    setLoading(true);
-
-    const res = await fetch(`/api/topics/${topicId}/posts`, {
+    await fetch(`/api/topics/${topicId}/posts`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        postTitle: form.postTitle,
-        postData: form.postData,
-        postAuthor: "admin",
-      }),
+      body: JSON.stringify(form),
     });
 
-    const data = await res.json();
-
-    setLoading(false);
-
-    if (!res.ok || !data.success) {
-      setError(data.message || "Failed to post reply.");
-      return;
-    }
-
     setForm({ postTitle: "", postData: "" });
-
-    // optional refresh (so replies appear immediately)
     window.location.reload();
   }
 
@@ -76,21 +50,17 @@ export default function TopicClient({ topicId }: Props) {
       <textarea
         className="bg-gray-100 border border-black m-2 p-2"
         placeholder="Enter your post data here..."
-        cols={50}
         rows={6}
         value={form.postData}
         name="postData"
         onChange={handleChange}
       />
 
-      {error && <p className="text-red-500 m-2 font-bold">{error}</p>}
-
       <button
         type="submit"
-        disabled={loading}
-        className="bg-[#3390d6] text-black border border-black m-2 p-2 disabled:opacity-50"
+        className="bg-[#3390d6] text-black border border-black m-2 p-2"
       >
-        {loading ? "Posting..." : "Submit reply"}
+        Submit reply
       </button>
     </form>
   );

@@ -25,13 +25,14 @@ export default async function TopicPage({ params }: Props) {
   return (
     <div className="p-10 max-w-3xl mx-auto">
       <h1 className="text-3xl font-bold mb-4 text-white">{topic.topicTitle}</h1>
+
       <p className="text-white mb-2">{topic.topicDescription}</p>
       <p className="mb-4 text-white">{topic.topicData}</p>
+
       <span className="text-sm text-white">
         Created by: {topic.topicAuthor}
       </span>
 
-      {/* Client-side form */}
       <TopicClient topicId={id} />
     </div>
   );

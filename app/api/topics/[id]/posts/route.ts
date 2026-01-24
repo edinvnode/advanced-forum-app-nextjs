@@ -16,14 +16,13 @@ type Topic = {
     topicData: string;
     topicAuthor: string;
     createdAt: Date;
-    posts: Post[]; // ✅ important
+    posts: Post[]; // ✅ this is what TS needs
 };
 
 export async function POST(
     req: Request,
-    { params }: { params: Promise<{ id: string }> }
+    { params }: { params: { id: string } }
 ) {
-    const { id } = await params;
     const body = await req.json();
 
     const client = await clientPromise;
@@ -37,8 +36,8 @@ export async function POST(
     };
 
     const result = await db.collection<Topic>("topics").updateOne(
-        { _id: new ObjectId(id) },
-        { $push: { posts: newPost } } // ✅ no TS error now
+        { _id: new ObjectId(params.id) },
+        { $push: { posts: newPost } } // ✅ no TS error
     );
 
     if (result.matchedCount === 0) {
