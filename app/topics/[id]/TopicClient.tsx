@@ -24,16 +24,19 @@ export default function TopicClient({ topicId }: Props) {
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    await fetch(`/api/topics/${topicId}/posts`, {
+    console.log(`/api/topics/${topicId}/posts`);
+
+    await fetch(`/api/topics/${topicId}/posts/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(form),
+      body: JSON.stringify({
+        postTitle: form.postTitle,
+        postData: form.postData,
+        postAuthor: "admin",
+      }),
     });
-
-    setForm({ postTitle: "", postData: "" });
-    window.location.reload();
   }
 
   return (

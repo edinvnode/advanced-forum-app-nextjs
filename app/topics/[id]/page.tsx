@@ -5,7 +5,7 @@ import { ObjectId } from "mongodb";
 import TopicClient from "./TopicClient";
 
 type Props = {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 };
 
 export default async function TopicPage({ params }: Props) {
