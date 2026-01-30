@@ -11,6 +11,7 @@ export default function TopicClient({ topicId }: Props) {
     postTitle: "",
     postData: "",
   });
+  const [loading, setLoading] = useState(false);
 
   function handleChange(
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -23,8 +24,9 @@ export default function TopicClient({ topicId }: Props) {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setLoading(true);
 
-    console.log(`/api/topics/${topicId}/posts`);
+    //console.log(`/api/topics/${topicId}/posts`);
 
     await fetch(`/api/topics/${topicId}/posts/`, {
       method: "POST",
@@ -37,6 +39,13 @@ export default function TopicClient({ topicId }: Props) {
         postAuthor: "admin",
       }),
     });
+
+    setForm({
+      postTitle: "",
+      postData: "",
+    });
+
+    setLoading(false);
   }
 
   return (
@@ -63,7 +72,7 @@ export default function TopicClient({ topicId }: Props) {
         type="submit"
         className="bg-[#3390d6] text-black border border-black m-2 p-2"
       >
-        Submit reply
+        {loading ? "Submitting thereply " : "Submit reply"}
       </button>
     </form>
   );

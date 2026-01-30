@@ -48,7 +48,7 @@ export async function POST(
     req: Request,
     context: { params: Promise<{ id: string }> }
 ) {
-    const { id } = await context.params; // ✅ REQUIRED in Next 15
+    const { id } = await context.params;
 
     const body = await req.json();
 
@@ -56,19 +56,23 @@ export async function POST(
     const db = client.db("forumdata");
     const collection = db.collection("topics");
 
-    const result = await collection.updateOne(
+
+    await collection.updateOne(
         { _id: new ObjectId(id) },
         {
             $push: {
                 posts: {
+                    _id: new ObjectId(),
                     postTitle: body.postTitle,
                     postData: body.postData,
                     postAuthor: body.postAuthor ?? "admin",
                     createdAt: new Date(),
                 },
-            },
+            } as any,
         }
     );
+
+
 
     return NextResponse.json({ success: true });
 }
