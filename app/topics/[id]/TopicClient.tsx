@@ -4,9 +4,10 @@ import { useState, ChangeEvent, FormEvent } from "react";
 
 type Props = {
   topicId: string;
+  topicPosts: string[];
 };
 
-export default function TopicClient({ topicId }: Props) {
+export default function TopicClient({ topicId, topicPosts }: Props) {
   const [form, setForm] = useState({
     postTitle: "",
     postData: "",
@@ -49,31 +50,36 @@ export default function TopicClient({ topicId }: Props) {
   }
 
   return (
-    <form className="mt-10 flex flex-col" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Post title..."
-        className="border border-black bg-gray-100 m-2 p-2"
-        name="postTitle"
-        value={form.postTitle}
-        onChange={handleChange}
-      />
+    <>
+      <form className="mt-10 flex flex-col" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Post title..."
+          className="border border-black bg-gray-100 m-2 p-2"
+          name="postTitle"
+          value={form.postTitle}
+          onChange={handleChange}
+        />
 
-      <textarea
-        className="bg-gray-100 border border-black m-2 p-2"
-        placeholder="Enter your post data here..."
-        rows={6}
-        value={form.postData}
-        name="postData"
-        onChange={handleChange}
-      />
+        <textarea
+          className="bg-gray-100 border border-black m-2 p-2"
+          placeholder="Enter your post data here..."
+          rows={6}
+          value={form.postData}
+          name="postData"
+          onChange={handleChange}
+        />
 
-      <button
-        type="submit"
-        className="bg-[#3390d6] text-black border border-black m-2 p-2"
-      >
-        {loading ? "Submitting thereply " : "Submit reply"}
-      </button>
-    </form>
+        <button
+          type="submit"
+          className="bg-[#3390d6] text-black border border-black m-2 p-2"
+        >
+          {loading ? "Submitting thereply " : "Submit reply"}
+        </button>
+      </form>
+      {topicPosts.map((post) => (
+        <h2>{post.postTitle}</h2>
+      ))}
+    </>
   );
 }

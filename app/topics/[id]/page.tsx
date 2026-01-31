@@ -18,6 +18,8 @@ export default async function TopicPage({ params }: Props) {
     _id: new ObjectId(id),
   });
 
+  const topicPosts = topic?.posts;
+
   if (!topic) {
     return <div className="p-10">Topic not found</div>;
   }
@@ -33,7 +35,7 @@ export default async function TopicPage({ params }: Props) {
         Created by: {topic.topicAuthor}
       </span>
 
-      <TopicClient topicId={id} />
+      <TopicClient topicId={id} topicPosts={topicPosts} />
     </div>
   );
 }
