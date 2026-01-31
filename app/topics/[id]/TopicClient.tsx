@@ -4,8 +4,10 @@ import { useState, ChangeEvent, FormEvent } from "react";
 
 type Props = {
   topicId: string;
-  topicPosts: string[];
+  topicPosts: Post[];
 };
+
+import { Post } from "@/types/topic";
 
 export default function TopicClient({ topicId, topicPosts }: Props) {
   const [form, setForm] = useState({
@@ -51,6 +53,9 @@ export default function TopicClient({ topicId, topicPosts }: Props) {
 
   return (
     <>
+      {topicPosts.map((post) => (
+        <h2>{post.postTitle}</h2>
+      ))}
       <form className="mt-10 flex flex-col" onSubmit={handleSubmit}>
         <input
           type="text"
@@ -77,9 +82,6 @@ export default function TopicClient({ topicId, topicPosts }: Props) {
           {loading ? "Submitting thereply " : "Submit reply"}
         </button>
       </form>
-      {topicPosts.map((post) => (
-        <h2>{post.postTitle}</h2>
-      ))}
     </>
   );
 }
