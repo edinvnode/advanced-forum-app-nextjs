@@ -2,6 +2,11 @@
 
 import { useState, ChangeEvent, FormEvent } from "react";
 
+//components
+import PostArticle from "@/components/PostArticle";
+
+import { useRouter } from "next/navigation";
+
 type Props = {
   topicId: string;
   topicPosts: Post[];
@@ -15,6 +20,8 @@ export default function TopicClient({ topicId, topicPosts }: Props) {
     postData: "",
   });
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   function handleChange(
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -49,12 +56,13 @@ export default function TopicClient({ topicId, topicPosts }: Props) {
     });
 
     setLoading(false);
+    router.refresh();
   }
 
   return (
     <>
       {topicPosts.map((post) => (
-        <h2>{post.postTitle}</h2>
+        <PostArticle post={post} key={post._id} />
       ))}
       <form className="mt-10 flex flex-col" onSubmit={handleSubmit}>
         <input
@@ -79,7 +87,7 @@ export default function TopicClient({ topicId, topicPosts }: Props) {
           type="submit"
           className="bg-[#3390d6] text-black border border-black m-2 p-2"
         >
-          {loading ? "Submitting thereply " : "Submit reply"}
+          {loading ? "Submitting the reply " : "Submit reply"}
         </button>
       </form>
     </>
