@@ -62,8 +62,9 @@ export default function TopicClient({ topicId, topicPosts }: Props) {
   return (
     <>
       {topicPosts.map((post) => (
-        <PostArticle post={post} key={post._id} />
+        <PostArticle post={post} key={post._id.toString()} />
       ))}
+
       <form className="mt-10 flex flex-col" onSubmit={handleSubmit}>
         <input
           type="text"
