@@ -32,12 +32,17 @@ function PostArticle({ post }: Props) {
   }
 
   return (
-    <article className="text-white">
-      <h2 className="border border-white">{post.postTitle}</h2>
-      <p className="border border-white">{post.postData}</p>
-      <span className="text-sm border border-white">
+    <article className="text-white border border-blue-700">
+      <h2 className="border border-white mx-2">{post.postTitle}</h2>
+      <p className="border border-white mx-2">{post.postData}</p>
+      <p className="text-sm border border-white mx-2">
         {timeAgo(post.createdAt)}
-      </span>
+      </p>
+      <p className="border border-white mx-2">Post author: {post.postAuthor}</p>
+      <div className="flex justify-between mx-2">
+        <button>Edit</button>
+        <button>Delete</button>
+      </div>
     </article>
   );
 }
